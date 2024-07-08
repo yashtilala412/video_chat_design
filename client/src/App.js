@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, AppBar } from '@material-ui/core';
+import { Typography, AppBar, Grid, Container } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import VideoPlayer from './components/VideoPlayer';
@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
     [theme.breakpoints.down('xs')]: {
       width: '90%',
+      margin: '30px 0',
     },
   },
   image: {
@@ -36,15 +37,21 @@ const App = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.wrapper}>
+    <Container maxWidth="lg" className={classes.wrapper}>
       <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography variant="h2" align="center">Video Chat</Typography>
       </AppBar>
-      <VideoPlayer />
-      <Sidebar>
-        <Notifications />
-      </Sidebar>
-    </div>
+      <Grid container spacing={3}>
+        <Grid item xs={12} md={8}>
+          <VideoPlayer />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <Sidebar>
+            <Notifications />
+          </Sidebar>
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
