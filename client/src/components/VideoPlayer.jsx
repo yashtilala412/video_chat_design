@@ -9,6 +9,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       width: '300px',
     },
+    transition: 'transform 0.3s ease-in-out',
+    '&:hover': {
+      transform: 'scale(1.05)',
+    },
   },
   gridContainer: {
     justifyContent: 'center',
