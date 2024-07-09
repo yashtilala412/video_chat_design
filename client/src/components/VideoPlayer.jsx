@@ -22,8 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: '10px',
-    border: '2px solid black',
     margin: '10px',
+    boxShadow: theme.shadows[5], // Custom shadow
+    elevation: 3, // Default elevation
   },
 }));
 
@@ -34,7 +35,7 @@ const VideoPlayer = () => {
   return (
     <Grid container className={classes.gridContainer}>
       {stream && (
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={3}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" gutterBottom>{name || 'Name'}</Typography>
             <video playsInline muted ref={myVideo} autoPlay className={classes.video} />
@@ -42,7 +43,7 @@ const VideoPlayer = () => {
         </Paper>
       )}
       {callAccepted && !callEnded && (
-        <Paper className={classes.paper}>
+        <Paper className={classes.paper} elevation={3}>
           <Grid item xs={12} md={6}>
             <Typography variant="h5" gutterBottom>{call.name || 'Name'}</Typography>
             <video playsInline ref={userVideo} autoPlay className={classes.video} />
