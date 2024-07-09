@@ -20,6 +20,21 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
+    height: '100vh', // Ensure the container takes full height for scrollbar demonstration
+    overflowY: 'auto', // Enable vertical scrolling
+    '&::-webkit-scrollbar': {
+      width: '8px',
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#888',
+      borderRadius: '4px',
+    },
+    '&::-webkit-scrollbar-thumb:hover': {
+      backgroundColor: '#555',
+    },
+    '&::-webkit-scrollbar-track': {
+      backgroundColor: '#f1f1f1',
+    },
   },
   paper: {
     padding: '10px',
