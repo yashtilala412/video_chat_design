@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Grid, Typography, Paper, makeStyles } from '@material-ui/core';
+import { Grid, Typography, Paper, makeStyles, useMediaQuery } from '@material-ui/core';
+import { useTheme } from '@material-ui/core/styles';
 
 import { SocketContext } from '../Context';
 
@@ -31,13 +32,15 @@ const useStyles = makeStyles((theme) => ({
 const VideoPlayer = () => {
   const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(SocketContext);
   const classes = useStyles();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('xs'));
 
   return (
     <Grid container className={classes.gridContainer}>
       {stream && (
         <Paper className={classes.paper} elevation={3}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom>{name || 'Name'}</Typography>
+            <Typography variant={isSmallScreen ? 'h6' : 'h5'} gutterBottom>{name || 'Name'}</Typography>
             <video playsInline muted ref={myVideo} autoPlay className={classes.video} />
           </Grid>
         </Paper>
@@ -45,7 +48,7 @@ const VideoPlayer = () => {
       {callAccepted && !callEnded && (
         <Paper className={classes.paper} elevation={3}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h5" gutterBottom>{call.name || 'Name'}</Typography>
+            <Typography variant={isSmallScreen ? 'h6' : 'h5'} gutterBottom>{call.name || 'Name'}</Typography>
             <video playsInline ref={userVideo} autoPlay className={classes.video} />
           </Grid>
         </Paper>
