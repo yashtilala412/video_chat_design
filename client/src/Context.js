@@ -79,6 +79,14 @@ const ContextProvider = ({ children }) => {
 
     window.location.reload();
   };
+  // Assuming you have a declineCall method in your context
+const SocketContext = React.createContext({
+  answerCall: () => {},
+  declineCall: () => {},
+  call: { isReceivingCall: false, name: '' },
+  callAccepted: false,
+});
+
 
   return (
     <SocketContext.Provider value={{
