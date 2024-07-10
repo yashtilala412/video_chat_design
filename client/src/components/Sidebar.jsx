@@ -10,16 +10,16 @@ import { SocketContext } from '../Context';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
   },
   gridContainer: {
-    width: '100%',
+    width: '60%',
     [theme.breakpoints.down('xs')]: {
       flexDirection: 'column',
     },
   },
   container: {
-    width: '600px',
+    width: '500px',
     margin: '35px 0',
     padding: 0,
     [theme.breakpoints.down('xs')]: {
