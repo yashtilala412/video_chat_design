@@ -48,12 +48,12 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   nameContainer: {
-    display: 'full',
+    display: 'flex',
     alignItems: 'center',
     marginBottom: theme.spacing(2),
   },
   fullScreenButton: {
-    position: 'absolute',
+    position: 'relative',
     top: theme.spacing(1),
     right: theme.spacing(1),
   },
