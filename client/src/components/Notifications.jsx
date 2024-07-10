@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, Badge } from '@material-ui/core';
 import { SocketContext } from '../Context';
 
 const Notifications = () => {
-  const { answerCall, declineCall, call, callAccepted, isMuted, toggleMute } = useContext(SocketContext);
+  const { answerCall, declineCall, call, callAccepted, isMuted, toggleMute, leaveCall, missedCalls } = useContext(SocketContext);
 
   return (
     <>
@@ -27,6 +27,9 @@ const Notifications = () => {
         <Button variant="contained" onClick={toggleMute}>
           {isMuted ? 'Unmute Notifications' : 'Mute Notifications'}
         </Button>
+        <Badge badgeContent={missedCalls} color="secondary" style={{ marginLeft: '10px' }}>
+          <p>Missed Calls</p>
+        </Badge>
       </div>
       {callAccepted && (
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
