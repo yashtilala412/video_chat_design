@@ -54,8 +54,8 @@ const useStyles = makeStyles((theme) => ({
   },
   fullScreenButton: {
     position: 'relative',
-    top: theme.spacing(1),
-    right: theme.spacing(1),
+    top: theme.spacing(2),
+    right: theme.spacing(2),
   },
 }));
 
