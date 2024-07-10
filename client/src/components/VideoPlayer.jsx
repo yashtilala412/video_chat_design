@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
     height: '100vh',
-    overflowY: 'auto',
+    overflowY: 'rlative',
     '&::-webkit-scrollbar': {
-      width: '8px',
+      width: '10px',
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: '#888',
