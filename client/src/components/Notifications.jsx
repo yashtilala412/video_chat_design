@@ -32,7 +32,7 @@ const Notifications = () => {
         </Badge>
       </div>
       {callAccepted && (
-       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px', letterSpacing: '0.05em' }}>
+       <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px', textTransform: 'uppercase' }}>
 
 
 
