@@ -32,7 +32,8 @@ const Notifications = () => {
         </Badge>
       </div>
       {callAccepted && (
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+
           <Button variant="contained" color="secondary" onClick={leaveCall}>
             End Call
           </Button>
