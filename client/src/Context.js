@@ -1,188 +1,71 @@
-import React, { createContext, useState, useRef, useEffect } from 'react';
-import { io } from 'socket.io-client';
-import Peer from 'simple-peer';
-import ringtone from './ringtone.mp3';
-const SocketContext = createContext();
+const [recording, setRecording] = useState(false);
+const mediaRecorderRef = useRef(null);
+const recordedChunks = useRef([]);
 
-const socket = io('https://warm-wildwood-81069.herokuapp.com');
+const startRecording = () => {
+  if (stream) {
+    const options = { mimeType: 'video/webm; codecs=vp9' };
+    const mediaRecorder = new MediaRecorder(stream, options);
 
-const ContextProvider = ({ children }) => {
-  const [callAccepted, setCallAccepted] = useState(false);
-  const [callEnded, setCallEnded] = useState(false);
-  const [stream, setStream] = useState();
-  const [name, setName] = useState('');
-  const [call, setCall] = useState({});
-  const [me, setMe] = useState('');
-  const [isMuted, setIsMuted] = useState(false);
-  const myVideo = useRef();
-  const userVideo = useRef();
-  const connectionRef = useRef();
+    mediaRecorder.ondataavailable = (event) => {
+      if (event.data.size > 0) {
+        recordedChunks.current.push(event.data);
+      }
+    };
 
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-
-        myVideo.current.srcObject = currentStream;
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(recordedChunks.current, {
+        type: 'video/webm'
       });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.style = 'display: none';
+      a.href = url;
+      a.download = 'recording.webm';
+      a.click();
+      window.URL.revokeObjectURL(url);
+      recordedChunks.current = [];
+    };
 
-    socket.on('me', (id) => setMe(id));
-
-    socket.on('callUser', ({ from, name: callerName, signal }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal });
-    });
-  }, []);
-
-  const answerCall = () => {
-    setCallAccepted(true);
-
-    const peer = new Peer({ initiator: false, trickle: false, stream });
-
-    peer.on('signal', (data) => {
-      socket.emit('answerCall', { signal: data, to: call.from });
-    });
-
-    peer.on('stream', (currentStream) => {
-      userVideo.current.srcObject = currentStream;
-    });
-
-    peer.signal(call.signal);
-
-    connectionRef.current = peer;
-  };
-
-  const callUser = (id) => {
-    const peer = new Peer({ initiator: true, trickle: false, stream });
-
-    peer.on('signal', (data) => {
-      socket.emit('callUser', { userToCall: id, signalData: data, from: me, name });
-    });
-
-    peer.on('stream', (currentStream) => {
-      userVideo.current.srcObject = currentStream;
-    });
-
-    socket.on('callAccepted', (signal) => {
-      setCallAccepted(true);
-
-      peer.signal(signal);
-    });
-
-    connectionRef.current = peer;
-  };
-
-  const leaveCall = () => {
-    setCallEnded(true);
-
-    if (connectionRef.current) {
-      connectionRef.current.destroy();
-    }
-
-    window.location.reload();
-  };
-
-  const declineCall = () => {
-    setCall({});
-  };
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-  };
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-  
-        myVideo.current.srcObject = currentStream;
-      });
-  
-    socket.on('me', (id) => setMe(id));
-  
-    socket.on('callUser', ({ from, name: callerName, signal, avatar }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal, avatar });
-    });
-  }, []);
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-  
-        myVideo.current.srcObject = currentStream;
-      });
-  
-    socket.on('me', (id) => setMe(id));
-  
-    socket.on('callUser', ({ from, name: callerName, signal, avatar, status, location }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal, avatar, status, location });
-    });
-  }, []);
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-      .then((currentStream) => {
-        setStream(currentStream);
-  
-        myVideo.current.srcObject = currentStream;
-      });
-  
-    socket.on('me', (id) => setMe(id));
-  
-    socket.on('callUser', ({ from, name: callerName, signal, avatar, status, location }) => {
-      setCall({ isReceivingCall: true, from, name: callerName, signal, avatar, status, location });
-  
-      const audio = new Audio(ringtone);
-      audio.play();
-    });
-  }, []);
-  const [missedCalls, setMissedCalls] = useState(0);
-
-const handleMissedCall = () => {
-  setMissedCalls((prev) => prev + 1);
+    mediaRecorder.start();
+    mediaRecorderRef.current = mediaRecorder;
+    setRecording(true);
+  }
 };
 
-useEffect(() => {
-  navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-    .then((currentStream) => {
-      setStream(currentStream);
-
-      myVideo.current.srcObject = currentStream;
-    });
-
-  socket.on('me', (id) => setMe(id));
-
-  socket.on('callUser', ({ from, name: callerName, signal, avatar, status, location }) => {
-    setCall({ isReceivingCall: true, from, name: callerName, signal, avatar, status, location });
-
-    const audio = new Audio(ringtone);
-    audio.play();
-  });
-}, []);
-
-const declineCall = () => {
-  setCall({});
-  handleMissedCall();
+const stopRecording = () => {
+  if (mediaRecorderRef.current) {
+    mediaRecorderRef.current.stop();
+    setRecording(false);
+  }
 };
 
-  return (
-    <SocketContext.Provider value={{
-      call,
-      callAccepted,
-      myVideo,
-      userVideo,
-      stream,
-      name,
-      setName,
-      callEnded,
-      me,
-      callUser,
-      leaveCall,
-      answerCall,
-      declineCall,
-      isMuted,
-      toggleMute,
-    }}>
-      {children}
-    </SocketContext.Provider>
-  );
-};
-
-export { ContextProvider, SocketContext };
+return (
+  <SocketContext.Provider value={{
+    call,
+    callAccepted,
+    myVideo,
+    userVideo,
+    stream,
+    name,
+    setName,
+    callEnded,
+    me,
+    callUser,
+    leaveCall,
+    answerCall,
+    declineCall,
+    isMuted,
+    toggleMute,
+    missedCalls,
+    startScreenShare,
+    messages,
+    sendMessage,
+    recording,
+    startRecording,
+    stopRecording, // Add recording methods
+  }}>
+    {children}
+  </SocketContext.Provider>
+);
