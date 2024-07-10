@@ -1,7 +1,7 @@
 import React, { createContext, useState, useRef, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import Peer from 'simple-peer';
-
+import ringtone from './ringtone.mp3';
 const SocketContext = createContext();
 
 const socket = io('https://warm-wildwood-81069.herokuapp.com');
@@ -133,6 +133,35 @@ const ContextProvider = ({ children }) => {
       audio.play();
     });
   }, []);
+  const [missedCalls, setMissedCalls] = useState(0);
+
+const handleMissedCall = () => {
+  setMissedCalls((prev) => prev + 1);
+};
+
+useEffect(() => {
+  navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+    .then((currentStream) => {
+      setStream(currentStream);
+
+      myVideo.current.srcObject = currentStream;
+    });
+
+  socket.on('me', (id) => setMe(id));
+
+  socket.on('callUser', ({ from, name: callerName, signal, avatar, status, location }) => {
+    setCall({ isReceivingCall: true, from, name: callerName, signal, avatar, status, location });
+
+    const audio = new Audio(ringtone);
+    audio.play();
+  });
+}, []);
+
+const declineCall = () => {
+  setCall({});
+  handleMissedCall();
+};
+
   return (
     <SocketContext.Provider value={{
       call,
