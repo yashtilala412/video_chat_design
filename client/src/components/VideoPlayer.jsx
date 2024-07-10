@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     },
     '&::-webkit-scrollbar-thumb': {
       backgroundColor: '#888',
-      borderRadius: '4px',
+      borderRadius: '8px',
     },
     '&::-webkit-scrollbar-thumb:hover': {
       backgroundColor: '#555',
