@@ -88,7 +88,21 @@ const ContextProvider = ({ children }) => {
   const toggleMute = () => {
     setIsMuted(!isMuted);
   };
-
+  useEffect(() => {
+    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+      .then((currentStream) => {
+        setStream(currentStream);
+  
+        myVideo.current.srcObject = currentStream;
+      });
+  
+    socket.on('me', (id) => setMe(id));
+  
+    socket.on('callUser', ({ from, name: callerName, signal, avatar }) => {
+      setCall({ isReceivingCall: true, from, name: callerName, signal, avatar });
+    });
+  }, []);
+  
   return (
     <SocketContext.Provider value={{
       call,

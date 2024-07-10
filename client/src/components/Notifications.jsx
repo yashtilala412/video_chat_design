@@ -3,12 +3,13 @@ import { Button } from '@material-ui/core';
 import { SocketContext } from '../Context';
 
 const Notifications = () => {
-  const { answerCall, declineCall, call, callAccepted, isMuted, toggleMute, leaveCall } = useContext(SocketContext);
+  const { answerCall, declineCall, call, callAccepted, isMuted, toggleMute } = useContext(SocketContext);
 
   return (
     <>
       {call.isReceivingCall && !callAccepted && !isMuted && (
-        <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+          <img src={call.avatar} alt={`${call.name}'s avatar`} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
           <h1>{call.name} is calling:</h1>
           <Button variant="contained" color="primary" onClick={answerCall}>
             Answer
