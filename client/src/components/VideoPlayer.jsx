@@ -16,9 +16,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   gridContainer: {
-    justifyContent: 'right',
+    justifyContent: 'middle',
     [theme.breakpoints.down('xs')]: {
-      flexDirection: 'column',
+      flexDirection: 'row',
     },
     height: '100vh',
     overflowY: 'rlative',
