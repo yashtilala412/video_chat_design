@@ -10,7 +10,11 @@ const Notifications = () => {
       {call.isReceivingCall && !callAccepted && !isMuted && (
         <div style={{ display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
           <img src={call.avatar} alt={`${call.name}'s avatar`} style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
-          <h1>{call.name} is calling:</h1>
+          <div>
+            <h1>{call.name} is calling:</h1>
+            <p>Status: {call.status}</p>
+            <p>Location: {call.location}</p>
+          </div>
           <Button variant="contained" color="primary" onClick={answerCall}>
             Answer
           </Button>
