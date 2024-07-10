@@ -32,7 +32,7 @@ const Notifications = () => {
         </Badge>
       </div>
       {callAccepted && (
-    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px', background: 'linear-gradient(to right, #ff7e5f, #feb47b)' }}>
+    <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '10px', backgroundImage: 'url("path/to/image.jpg")', backgroundSize: 'cover' }}>
 
 
 
