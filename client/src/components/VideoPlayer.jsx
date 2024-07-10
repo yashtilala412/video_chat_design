@@ -37,9 +37,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   paper: {
-    padding: '10px',
-    margin: '10px',
-    boxShadow: theme.shadows[5],
+    padding: '40px',
+    margin: '20px',
+    boxShadow: theme.shadows[6],
     elevation: 3,
   },
   avatar: {
@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   nameContainer: {
-    display: 'flex',
+    display: 'full',
     alignItems: 'center',
     marginBottom: theme.spacing(2),
   },
