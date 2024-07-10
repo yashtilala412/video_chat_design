@@ -99,7 +99,7 @@ const VideoPlayerFullScreen = () => {
           <Grid item xs={12} md={6}>
             <div className={classes.nameContainer}>
               <Avatar className={classes.avatar}>{call.name ? call.name.charAt(0) : 'N'}</Avatar>
-              <Typography variant={isSmallScreen ? 'h6' : 'h5'} gutterBottom>{call.name || 'Name'}</Typography>
+              <Typography variant={isSmallScreen ? 'h7' : 'h8'} gutterBottom>{call.name || 'Name'}</Typography>
             </div>
             <video ref={videoRef} playsInline ref={userVideo} autoPlay className={classes.video} />
             <IconButton className={classes.fullScreenButton} onClick={handleFullScreen}>
