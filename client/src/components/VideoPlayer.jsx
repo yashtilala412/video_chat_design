@@ -114,6 +114,25 @@ const VideoPlayerFullScreen = () => {
               setIsRecording(true);
             }
           };
+          const VideoPlayerFullScreen = () => {
+            // ... existing code
+            const [interfaceStyle, setInterfaceStyle] = useState({
+              layout: "default",
+              color: "#000",
+            });
+          
+            const handleStyleChange = (newStyle) => {
+              setInterfaceStyle(newStyle);
+            };
+          
+            return (
+              // ... existing code
+              <div style={{ backgroundColor: interfaceStyle.color }}>
+                {/* Customize interface layout */}
+              </div>
+            );
+          };
+          
         
           return (
             // ... existing code
