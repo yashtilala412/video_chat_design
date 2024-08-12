@@ -91,7 +91,22 @@ const VideoPlayerFullScreen = () => {
       const handleQualityChange = (event) => {
         setVideoQuality(event.target.value);
       };
-    
+      const VideoPlayerFullScreen = () => {
+        // ... existing code
+        const [muted, setMuted] = useState(false);
+      
+        const toggleMute = () => {
+          setMuted((prev) => !prev);
+        };
+      
+        return (
+          // ... existing code
+          <IconButton className={classes.fullScreenButton} onClick={toggleMute}>
+            {muted ? "Unmute" : "Mute"}
+          </IconButton>
+        );
+      };
+      
       return (
         // ... existing code
         <div>
