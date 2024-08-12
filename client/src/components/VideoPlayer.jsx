@@ -98,7 +98,31 @@ const VideoPlayerFullScreen = () => {
         const toggleMute = () => {
           setMuted((prev) => !prev);
         };
-      
+        const VideoPlayerFullScreen = () => {
+          // ... existing code
+          const [isRecording, setIsRecording] = useState(false);
+          const mediaRecorderRef = useRef(null);
+        
+          const handleRecord = () => {
+            if (isRecording) {
+              mediaRecorderRef.current.stop();
+              setIsRecording(false);
+            } else {
+              const options = { mimeType: "video/webm; codecs=vp9" };
+              mediaRecorderRef.current = new MediaRecorder(myVideo.current.srcObject, options);
+              mediaRecorderRef.current.start();
+              setIsRecording(true);
+            }
+          };
+        
+          return (
+            // ... existing code
+            <IconButton className={classes.fullScreenButton} onClick={handleRecord}>
+              {isRecording ? "Stop Recording" : "Start Recording"}
+            </IconButton>
+          );
+        };
+        
         return (
           // ... existing code
           <IconButton className={classes.fullScreenButton} onClick={toggleMute}>
