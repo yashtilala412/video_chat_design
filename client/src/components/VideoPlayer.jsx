@@ -84,7 +84,26 @@ const VideoPlayerFullScreen = () => {
     const handleVolumeChange = (event, newValue) => {
       setVolume(newValue);
     };
-  
+    const VideoPlayerFullScreen = () => {
+      // ... existing code
+      const [videoQuality, setVideoQuality] = useState("720p");
+    
+      const handleQualityChange = (event) => {
+        setVideoQuality(event.target.value);
+      };
+    
+      return (
+        // ... existing code
+        <div>
+          <select onChange={handleQualityChange} value={videoQuality}>
+            <option value="360p">360p</option>
+            <option value="720p">720p</option>
+            <option value="1080p">1080p</option>
+          </select>
+        </div>
+      );
+    };
+    
     return (
       // ... existing code
       <div>
