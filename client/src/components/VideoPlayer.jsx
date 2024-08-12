@@ -124,7 +124,26 @@ const VideoPlayerFullScreen = () => {
             const handleStyleChange = (newStyle) => {
               setInterfaceStyle(newStyle);
             };
-          
+            const VideoPlayerFullScreen = () => {
+              // ... existing code
+              const [subtitles, setSubtitles] = useState([]);
+            
+              const loadSubtitles = (lang) => {
+                // Logic to load subtitles based on language
+              };
+            
+              return (
+                // ... existing code
+                <div>
+                  <select onChange={(e) => loadSubtitles(e.target.value)}>
+                    <option value="en">English</option>
+                    <option value="es">Spanish</option>
+                    {/* Additional languages */}
+                  </select>
+                </div>
+              );
+            };
+            
             return (
               // ... existing code
               <div style={{ backgroundColor: interfaceStyle.color }}>
