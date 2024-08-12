@@ -79,6 +79,23 @@ const VideoPlayerFullScreen = () => {
   };
   const VideoPlayerFullScreen = () => {
   // ... existing code
+
+  const handlePiP = () => {
+    if (videoRef.current.requestPictureInPicture) {
+      videoRef.current.requestPictureInPicture();
+    }
+  };
+
+  return (
+    // ... existing code
+    <IconButton className={classes.fullScreenButton} onClick={handlePiP}>
+      PiP
+    </IconButton>
+  );
+};
+
+  const VideoPlayerFullScreen = () => {
+  // ... existing code
   const [isBlurred, setIsBlurred] = useState(false);
 
   const toggleBlur = () => {
