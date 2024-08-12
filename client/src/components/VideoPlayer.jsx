@@ -85,6 +85,24 @@ const VideoPlayerFullScreen = () => {
       videoRef.current.requestPictureInPicture();
     }
   };
+  const VideoPlayerFullScreen = () => {
+  // ... existing code
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
+
+  return (
+    // ... existing code
+    <div className={darkMode ? "dark-mode" : ""}>
+      <IconButton className={classes.fullScreenButton} onClick={toggleDarkMode}>
+        {darkMode ? "Light Mode" : "Dark Mode"}
+      </IconButton>
+    </div>
+  );
+};
+
 
   return (
     // ... existing code
