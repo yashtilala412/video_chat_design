@@ -77,6 +77,27 @@ const VideoPlayerFullScreen = () => {
       videoRef.current.msRequestFullscreen();
     }
   };
+  const VideoPlayerFullScreen = () => {
+  // ... existing code
+  const [isBlurred, setIsBlurred] = useState(false);
+
+  const toggleBlur = () => {
+    setIsBlurred((prev) => !prev);
+  };
+
+  return (
+    <Grid container className={classes.gridContainer}>
+      {/* ... existing code */}
+      <IconButton className={classes.fullScreenButton} onClick={toggleBlur}>
+        {isBlurred ? "Unblur" : "Blur Background"}
+      </IconButton>
+      <div style={{ filter: isBlurred ? "blur(5px)" : "none" }}>
+        {/* Video components */}
+      </div>
+    </Grid>
+  );
+};
+
 
   return (
     <Grid container className={classes.gridContainer}>
