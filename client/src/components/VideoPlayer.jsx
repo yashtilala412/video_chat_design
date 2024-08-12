@@ -78,28 +78,36 @@ const VideoPlayerFullScreen = () => {
     }
   };
   const VideoPlayerFullScreen = () => {
-  // ... existing code
-
-  const handlePiP = () => {
-    if (videoRef.current.requestPictureInPicture) {
-      videoRef.current.requestPictureInPicture();
-    }
+    // ... existing code
+    const [volume, setVolume] = useState(1);
+  
+    const handleVolumeChange = (event, newValue) => {
+      setVolume(newValue);
+    };
+  
+    return (
+      // ... existing code
+      <div>
+        <Typography id="volume-slider" gutterBottom>
+          Volume
+        </Typography>
+        <Slider
+          value={volume}
+          onChange={handleVolumeChange}
+          aria-labelledby="volume-slider"
+          step={0.1}
+          min={0}
+          max={1}
+        />
+      </div>
+    );
   };
-  const VideoPlayerFullScreen = () => {
-  // ... existing code
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => !prev);
-  };
-
+  
   return (
     // ... existing code
-    <div className={darkMode ? "dark-mode" : ""}>
-      <IconButton className={classes.fullScreenButton} onClick={toggleDarkMode}>
-        {darkMode ? "Light Mode" : "Dark Mode"}
-      </IconButton>
-    </div>
+    <IconButton className={classes.fullScreenButton} onClick={handleScreenShare}>
+      Share Screen
+    </IconButton>
   );
 };
 
