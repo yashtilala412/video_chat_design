@@ -84,6 +84,24 @@ const VideoPlayerFullScreen = () => {
   const toggleBlur = () => {
     setIsBlurred((prev) => !prev);
   };
+const VideoPlayerFullScreen = () => {
+  // ... existing code
+  const [playbackRate, setPlaybackRate] = useState(1);
+
+  const handlePlaybackRateChange = (rate) => {
+    setPlaybackRate(rate);
+  };
+
+  return (
+    // ... existing code
+    <div>
+      <button onClick={() => handlePlaybackRateChange(0.5)}>0.5x</button>
+      <button onClick={() => handlePlaybackRateChange(1)}>1x</button>
+      <button onClick={() => handlePlaybackRateChange(1.5)}>1.5x</button>
+      <button onClick={() => handlePlaybackRateChange(2)}>2x</button>
+    </div>
+  );
+};
 
   return (
     <Grid container className={classes.gridContainer}>
