@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Button, TextField, Grid, Typography, Container, Paper, Avatar, Switch, FormControlLabel } from '@material-ui/core';
+import React, { useState, useContext, useEffect } from 'react';
+import { Button, TextField, Grid, Typography, Container, Paper, Avatar, Switch, FormControlLabel, Modal } from '@material-ui/core';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
+import { Assignment, Phone, PhoneDisabled, Call } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
 
@@ -44,10 +44,21 @@ const useStyles = makeStyles((theme) => ({
   avatarOffline: {
     backgroundColor: red[500],
   },
+  modal: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalContent: {
+    backgroundColor: theme.palette.background.paper,
+    border: '2px solid #000',
+    padding: theme.spacing(2, 4, 3),
+    boxShadow: theme.shadows[5],
+  },
 }));
 
 const Sidebar = ({ children }) => {
-  const { me, callAccepted, name, setName, callEnded, leaveCall, callUser, callStatus } = useContext(SocketContext);
+  const { me, callAccepted, name, setName, callEnded, leaveCall, callUser, callStatus, isReceivingCall, answerCall } = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState('');
   const [callStartTime, setCallStartTime] = useState(null);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
@@ -119,6 +130,18 @@ const Sidebar = ({ children }) => {
         </form>
         {children}
       </Paper>
+      <Modal
+        open={isReceivingCall && !callAccepted}
+        onClose={() => {}}
+        className={classes.modal}
+      >
+        <div className={classes.modalContent}>
+          <Typography variant="h6">Incoming Call</Typography>
+          <Button variant="contained" color="primary" startIcon={<Call />} onClick={answerCall}>
+            Answer
+          </Button>
+        </div>
+      </Modal>
     </Container>
   );
 };
