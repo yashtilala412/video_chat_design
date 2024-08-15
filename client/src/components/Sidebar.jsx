@@ -31,13 +31,17 @@ const useStyles = makeStyles((theme) => ({
   margin: {
     marginTop: 20,
   },
-  padding: {
+
     padding: 20,
-  },
-  paper: {
-    padding: '10px 20px',
-    border: '2px solid black',
-  },
+    paper: {
+      padding: '10px 20px',
+      border: '2px solid black',
+      borderRadius: '10px',
+      boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
+      transition: 'background-color 0.3s ease', // Added
+      '&:hover': {                              // Added
+        backgroundColor: theme.palette.grey[200], // Added
+      },       
   avatar: {
     backgroundColor: green[500],
   },
@@ -56,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: theme.shadows[5],
   },
 }));
+
 
 const Sidebar = ({ children }) => {
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser, callStatus, isReceivingCall, answerCall } = useContext(SocketContext);
