@@ -42,24 +42,28 @@ const useStyles = makeStyles((theme) => ({
       '&:hover': {                              // Added
         backgroundColor: theme.palette.grey[200], // Added
       },       
-  avatar: {
-    backgroundColor: green[500],
-  },
-  avatarOffline: {
-    backgroundColor: red[500],
-  },
-  modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  modalContent: {
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    padding: theme.spacing(2, 4, 3),
-    boxShadow: theme.shadows[5],
-  },
-}));
+      buttonPrimary: {
+        backgroundColor: theme.palette.primary.main,
+        color: '#fff',
+        '&:hover': {
+          backgroundColor: theme.palette.primary.dark,
+        },
+        '& .MuiButton-startIcon': {           // Added
+          fontSize: '2rem',                   // Added
+        },                                    // Added
+      },
+      buttonSecondary: {
+        backgroundColor: theme.palette.secondary.main,
+        color: '#fff',
+        '&:hover': {
+          backgroundColor: theme.palette.secondary.dark,
+        },
+        '& .MuiButton-startIcon': {           // Added
+          fontSize: '2rem',                   // Added
+        },                                    // Added
+      },
+      // ... other styles
+    }));
 
 
 const Sidebar = ({ children }) => {
