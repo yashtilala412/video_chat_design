@@ -48,6 +48,7 @@ const Sidebar = ({ children }) => {
   const { me, callAccepted, name, setName, callEnded, leaveCall, callUser, callStatus } = useContext(SocketContext);
   const [idToCall, setIdToCall] = useState('');
   const [callStartTime, setCallStartTime] = useState(null);
+  const [isDarkTheme, setIsDarkTheme] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {
@@ -87,6 +88,11 @@ const Sidebar = ({ children }) => {
                   {callStatus === 'online' ? 'Online' : 'Offline'}
                 </Typography>
               </div>
+              <FormControlLabel
+                control={<Switch checked={isDarkTheme} onChange={() => setIsDarkTheme(!isDarkTheme)} />}
+                label="Dark Theme"
+                className={classes.margin}
+              />
             </Grid>
             <Grid item xs={12} md={6} className={classes.padding}>
               <Typography gutterBottom variant="h6">Make a call</Typography>
