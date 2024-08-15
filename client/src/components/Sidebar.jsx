@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Button, TextField, Grid, Typography, Container, Paper, Avatar, Switch, FormControlLabel } from '@material-ui/core';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Assignment, Phone, PhoneDisabled } from '@material-ui/icons';
@@ -6,6 +6,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { green, red } from '@material-ui/core/colors';
 
 import { SocketContext } from '../Context';
+// Assuming the notification sound file is located in the public directory
+const notificationSound = new Audio('/notification.mp3');
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +56,7 @@ const Sidebar = ({ children }) => {
   useEffect(() => {
     if (callAccepted && !callEnded) {
       setCallStartTime(Date.now());
+      notificationSound.play(); // Play sound on call acceptance
     } else {
       setCallStartTime(null);
     }
