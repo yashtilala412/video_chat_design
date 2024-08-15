@@ -62,6 +62,15 @@ const useStyles = makeStyles((theme) => ({
           fontSize: '2rem',                   // Added
         },                                    // Added
       },
+      gridContainer: {
+        width: '60%',
+        gap: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+          flexDirection: 'column',
+        },
+        '& > div:hover': {                        // Added
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', // Added
+        }, 
       // ... other styles
     }));
 
