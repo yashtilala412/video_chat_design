@@ -36,43 +36,25 @@ const useStyles = makeStyles((theme) => ({
     paper: {
       padding: '10px 20px',
       border: '2px solid black',
-      borderRadius: '10px',
-      boxShadow: '0 3px 5px 2px rgba(0, 0, 0, .3)',
-      transition: 'background-color 0.3s ease', // Added
-      '&:hover': {                              // Added
-        backgroundColor: theme.palette.grey[200], // Added
-      },       
-      buttonPrimary: {
-        backgroundColor: theme.palette.primary.main,
-        color: '#fff',
-        '&:hover': {
-          backgroundColor: theme.palette.primary.dark,
-        },
-        '& .MuiButton-startIcon': {           // Added
-          fontSize: '2rem',                   // Added
-        },                                    // Added
-      },
-      buttonSecondary: {
-        backgroundColor: theme.palette.secondary.main,
-        color: '#fff',
-        '&:hover': {
-          backgroundColor: theme.palette.secondary.dark,
-        },
-        '& .MuiButton-startIcon': {           // Added
-          fontSize: '2rem',                   // Added
-        },                                    // Added
-      },
-      gridContainer: {
-        width: '60%',
-        gap: theme.spacing(2),
-        [theme.breakpoints.down('xs')]: {
-          flexDirection: 'column',
-        },
-        '& > div:hover': {                        // Added
-          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)', // Added
-        }, 
-      // ... other styles
-    }));
+    },
+    avatar: {
+      backgroundColor: green[500],
+    },
+    avatarOffline: {
+      backgroundColor: red[500],
+    },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    modalContent: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      padding: theme.spacing(2, 4, 3),
+      boxShadow: theme.shadows[5],
+     
+    }}));
 
 
 const Sidebar = ({ children }) => {
