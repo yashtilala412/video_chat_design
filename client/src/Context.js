@@ -184,6 +184,11 @@ const [previewVisible, setPreviewVisible] = useState(false);
 const togglePreview = () => {
   setPreviewVisible(!previewVisible);
 };
+useEffect(() => {
+  if (!recording && recordedChunks.current.length) {
+    saveRecordingToServer(new Blob(recordedChunks.current, { type: 'video/webm' }));
+  }
+}, [recording]);
 
 return (
   <SocketContext.Provider value={{
