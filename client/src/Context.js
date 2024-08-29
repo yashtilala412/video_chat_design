@@ -216,6 +216,9 @@ const adjustVolume = (newVolume) => {
   myVideo.current.volume = newVolume / 100;
   setVolume(newVolume);
 };
+const highlightActiveSpeaker = () => {
+  // Logic to detect active speaker and highlight their video
+};
 
 return (
   <SocketContext.Provider value={{
