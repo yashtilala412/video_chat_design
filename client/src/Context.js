@@ -165,6 +165,20 @@ const confirmStopRecording = () => {
     stopRecording();
   }
 };
+const switchCamera = async () => {
+  const videoDevices = (await navigator.mediaDevices.enumerateDevices()).filter(
+    device => device.kind === 'videoinput'
+  );
+  const currentDeviceId = stream.getVideoTracks()[0].getSettings().deviceId;
+  const nextDeviceId = videoDevices.find(device => device.deviceId !== currentDeviceId).deviceId;
+  
+  const newStream = await navigator.mediaDevices.getUserMedia({
+    video: { deviceId: nextDeviceId },
+    audio: true
+  });
+  stream.getTracks().forEach(track => track.stop());
+  setStream(newStream);
+};
 
 return (
   <SocketContext.Provider value={{
