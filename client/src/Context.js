@@ -52,6 +52,12 @@ const resumeRecording = () => {
     setRecording(true);
   }
 };
+const [recordingQuality, setRecordingQuality] = useState("high");
+
+const handleQualityChange = (quality) => {
+  setRecordingQuality(quality);
+  // Additional logic to handle stream quality adjustment
+};
 
 return (
   <SocketContext.Provider value={{
