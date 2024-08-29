@@ -114,6 +114,16 @@ const startCountdown = () => {
     count--;
   }, 1000);
 };
+const downloadAudio = () => {
+  const audioChunks = recordedChunks.current.filter(chunk => chunk.type === 'audio/webm');
+  const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+  const url = URL.createObjectURL(audioBlob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'audio.webm';
+  a.click();
+  window.URL.revokeObjectURL(url);
+};
 
 return (
   <SocketContext.Provider value={{
