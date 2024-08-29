@@ -201,6 +201,15 @@ const toggleFullScreen = () => {
     document.exitFullscreen();
   }
 };
+const [watermarkText, setWatermarkText] = useState("Demo");
+
+const applyWatermark = () => {
+  const videoElement = myVideo.current;
+  const ctx = document.createElement('canvas').getContext('2d');
+  ctx.drawImage(videoElement, 0, 0, videoElement.videoWidth, videoElement.videoHeight);
+  ctx.font = "30px Arial";
+  ctx.fillText(watermarkText, 10, 30);
+};
 
 
 return (
