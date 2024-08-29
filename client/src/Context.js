@@ -69,6 +69,12 @@ useEffect(() => {
   }
   return () => clearInterval(interval);
 }, [recording]);
+const [isMuted, setIsMuted] = useState(false);
+
+const toggleMute = () => {
+  stream.getAudioTracks()[0].enabled = !isMuted;
+  setIsMuted(!isMuted);
+};
 
 return (
   <SocketContext.Provider value={{
