@@ -142,6 +142,13 @@ const downloadWithCustomFilename = () => {
   a.click();
   window.URL.revokeObjectURL(url);
 };
+const [remainingTime, setRemainingTime] = useState(maxDuration);
+
+useEffect(() => {
+  if (recording) {
+    setRemainingTime(maxDuration - recordingTime);
+  }
+}, [recordingTime]);
 
 return (
   <SocketContext.Provider value={{
