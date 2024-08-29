@@ -212,23 +212,7 @@ useEffect(() => {
 }, [stream]);
 const [volume, setVolume] = useState(100);
 
-const adjustVolume = (newVolume) => {
-  myVideo.current.volume = newVolume / 100;
-  setVolume(newVolume);
-};
-const highlightActiveSpeaker = () => {
-const highlightActiveSpeaker = () => {
-  // Logic to detect active speaker and highlight their video
-};
-const [videoQuality, setVideoQuality] = useState("High");
-const [darkMode, setDarkMode] = useState(false);
 
-const toggleDarkMode = () => {
-  setDarkMode(!darkMode);
-  document.body.classList.toggle('dark-mode', darkMode);
-};
-
-return <div>Video Quality: {videoQuality}</div>;
 
 return (
   <SocketContext.Provider value={{
