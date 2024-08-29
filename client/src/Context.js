@@ -75,6 +75,11 @@ const toggleMute = () => {
   stream.getAudioTracks()[0].enabled = !isMuted;
   setIsMuted(!isMuted);
 };
+const [filter, setFilter] = useState("none");
+
+const applyFilter = () => {
+  myVideo.current.style.filter = filter;
+};
 
 return (
   <SocketContext.Provider value={{
