@@ -236,6 +236,22 @@ const switchCamera = async () => {
     setStream(newStream);
   }
 };
+const [countdown, setCountdown] = useState(5);
+const [showCountdown, setShowCountdown] = useState(false);
+
+const startCountdown = () => {
+  setShowCountdown(true);
+  let count = 5;
+  const intervalId = setInterval(() => {
+    setCountdown(count);
+    if (count === 0) {
+      clearInterval(intervalId);
+      setShowCountdown(false);
+      startRecording();
+    }
+    count--;
+  }, 1000);
+};
 
 
 return (
