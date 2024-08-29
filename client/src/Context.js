@@ -252,6 +252,19 @@ const startCountdown = () => {
     count--;
   }, 1000);
 };
+const [controlsVisible, setControlsVisible] = useState(true);
+
+const toggleControlsVisibility = () => {
+  setControlsVisible(!controlsVisible);
+};
+
+const recordingControlsOverlay = (
+  <div style={{ display: controlsVisible ? 'block' : 'none' }}>
+    <button onClick={stopRecording}>Stop</button>
+    <button onClick={toggleFullScreen}>Full Screen</button>
+    {/* Add more custom controls here */}
+  </div>
+);
 
 
 return (
