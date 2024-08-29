@@ -197,6 +197,11 @@ const [brightness, setBrightness] = useState(100);
 const adjustBrightness = () => {
   myVideo.current.style.filter = `brightness(${brightness}%)`;
 };
+const [format, setFormat] = useState("webm");
+
+const handleFormatChange = (newFormat) => {
+  setFormat(newFormat);
+};
 
 return (
   <SocketContext.Provider value={{
