@@ -189,6 +189,9 @@ useEffect(() => {
     saveRecordingToServer(new Blob(recordedChunks.current, { type: 'video/webm' }));
   }
 }, [recording]);
+const recordingStatus = recording ? "Recording..." : "Stopped";
+
+return <div>{recordingStatus}</div>;
 
 return (
   <SocketContext.Provider value={{
