@@ -202,6 +202,14 @@ const [format, setFormat] = useState("webm");
 const handleFormatChange = (newFormat) => {
   setFormat(newFormat);
 };
+const [frameRate, setFrameRate] = useState(30);
+
+useEffect(() => {
+  if (stream) {
+    const settings = stream.getVideoTracks()[0].getSettings();
+    setFrameRate(settings.frameRate);
+  }
+}, [stream]);
 
 return (
   <SocketContext.Provider value={{
