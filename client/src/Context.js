@@ -179,6 +179,11 @@ const switchCamera = async () => {
   stream.getTracks().forEach(track => track.stop());
   setStream(newStream);
 };
+const [previewVisible, setPreviewVisible] = useState(false);
+
+const togglePreview = () => {
+  setPreviewVisible(!previewVisible);
+};
 
 return (
   <SocketContext.Provider value={{
