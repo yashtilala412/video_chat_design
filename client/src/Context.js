@@ -80,6 +80,14 @@ const [filter, setFilter] = useState("none");
 const applyFilter = () => {
   myVideo.current.style.filter = filter;
 };
+const saveRecordingToServer = (blob) => {
+  const formData = new FormData();
+  formData.append('video', blob, 'recording.webm');
+  fetch('/upload', {
+    method: 'POST',
+    body: formData,
+  });
+};
 
 return (
   <SocketContext.Provider value={{
