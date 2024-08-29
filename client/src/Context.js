@@ -219,6 +219,9 @@ const adjustVolume = (newVolume) => {
 const highlightActiveSpeaker = () => {
   // Logic to detect active speaker and highlight their video
 };
+const [videoQuality, setVideoQuality] = useState("High");
+
+return <div>Video Quality: {videoQuality}</div>;
 
 return (
   <SocketContext.Provider value={{
