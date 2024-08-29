@@ -210,6 +210,12 @@ useEffect(() => {
     setFrameRate(settings.frameRate);
   }
 }, [stream]);
+const [volume, setVolume] = useState(100);
+
+const adjustVolume = (newVolume) => {
+  myVideo.current.volume = newVolume / 100;
+  setVolume(newVolume);
+};
 
 return (
   <SocketContext.Provider value={{
