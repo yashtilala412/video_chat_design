@@ -124,6 +124,13 @@ const downloadAudio = () => {
   a.click();
   window.URL.revokeObjectURL(url);
 };
+const [maxDuration, setMaxDuration] = useState(300); // seconds
+
+useEffect(() => {
+  if (recording && recordingTime >= maxDuration) {
+    stopRecording();
+  }
+}, [recordingTime]);
 
 return (
   <SocketContext.Provider value={{
