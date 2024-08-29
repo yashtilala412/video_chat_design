@@ -194,6 +194,13 @@ useEffect(() => {
 }, [stream]);
 const [volume, setVolume] = useState(100);
 
+const toggleFullScreen = () => {
+  if (!document.fullscreenElement) {
+    myVideo.current.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+};
 
 
 return (
