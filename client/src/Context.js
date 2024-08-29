@@ -40,6 +40,12 @@ const stopRecording = () => {
     setRecording(false);
   }
 };
+const pauseRecording = () => {
+  if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
+    mediaRecorderRef.current.pause();
+    setRecording(false);
+  }
+};
 
 return (
   <SocketContext.Provider value={{
