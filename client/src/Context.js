@@ -155,6 +155,11 @@ const toggleVideoFlip = () => {
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
 };
+const [screenshotActive, setScreenshotActive] = useState(false);
+
+const toggleScreenshotCapture = () => {
+  setScreenshotActive(!screenshotActive);
+};
 
 return (
   <SocketContext.Provider value={{
