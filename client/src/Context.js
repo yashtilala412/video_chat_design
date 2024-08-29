@@ -101,6 +101,19 @@ const captureScreenshot = () => {
   a.download = 'screenshot.png';
   a.click();
 };
+const [countdown, setCountdown] = useState(3);
+
+const startCountdown = () => {
+  let count = 3;
+  const timer = setInterval(() => {
+    setCountdown(count);
+    if (count === 0) {
+      clearInterval(timer);
+      startRecording();
+    }
+    count--;
+  }, 1000);
+};
 
 return (
   <SocketContext.Provider value={{
