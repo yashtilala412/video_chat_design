@@ -160,6 +160,11 @@ const [screenshotActive, setScreenshotActive] = useState(false);
 const toggleScreenshotCapture = () => {
   setScreenshotActive(!screenshotActive);
 };
+const confirmStopRecording = () => {
+  if (window.confirm("Are you sure you want to stop recording?")) {
+    stopRecording();
+  }
+};
 
 return (
   <SocketContext.Provider value={{
