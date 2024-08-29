@@ -131,6 +131,17 @@ useEffect(() => {
     stopRecording();
   }
 }, [recordingTime]);
+const [filename, setFilename] = useState("recording.webm");
+
+const downloadWithCustomFilename = () => {
+  const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  a.click();
+  window.URL.revokeObjectURL(url);
+};
 
 return (
   <SocketContext.Provider value={{
