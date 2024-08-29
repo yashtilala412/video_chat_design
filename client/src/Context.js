@@ -224,6 +224,18 @@ const handleRecordingComplete = () => {
   const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
   uploadToCloud(blob);
 };
+const switchCamera = async () => {
+  const devices = await navigator.mediaDevices.enumerateDevices();
+  const videoDevices = devices.filter(device => device.kind === 'videoinput');
+  const currentDeviceId = stream.getVideoTracks()[0].getSettings().deviceId;
+  const nextDevice = videoDevices.find(device => device.deviceId !== currentDeviceId);
+
+  if (nextDevice) {
+    const newStream = await navigator.mediaDevices.getUserMedia({ video: { deviceId: nextDevice.deviceId } });
+    stream.getTracks().forEach(track => track.stop());
+    setStream(newStream);
+  }
+};
 
 
 return (
