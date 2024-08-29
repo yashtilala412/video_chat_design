@@ -210,6 +210,20 @@ const applyWatermark = () => {
   ctx.font = "30px Arial";
   ctx.fillText(watermarkText, 10, 30);
 };
+const uploadToCloud = async (blob) => {
+  const formData = new FormData();
+  formData.append('video', blob);
+
+  await fetch('https://cloudstorage.example.com/upload', {
+    method: 'POST',
+    body: formData,
+  });
+};
+
+const handleRecordingComplete = () => {
+  const blob = new Blob(recordedChunks.current, { type: 'video/webm' });
+  uploadToCloud(blob);
+};
 
 
 return (
