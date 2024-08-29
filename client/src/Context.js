@@ -58,6 +58,17 @@ const handleQualityChange = (quality) => {
   setRecordingQuality(quality);
   // Additional logic to handle stream quality adjustment
 };
+const [recordingTime, setRecordingTime] = useState(0);
+
+useEffect(() => {
+  let interval;
+  if (recording) {
+    interval = setInterval(() => {
+      setRecordingTime((prev) => prev + 1);
+    }, 1000);
+  }
+  return () => clearInterval(interval);
+}, [recording]);
 
 return (
   <SocketContext.Provider value={{
