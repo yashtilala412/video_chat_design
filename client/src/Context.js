@@ -149,6 +149,12 @@ useEffect(() => {
     setRemainingTime(maxDuration - recordingTime);
   }
 }, [recordingTime]);
+const [isFlipped, setIsFlipped] = useState(false);
+
+const toggleVideoFlip = () => {
+  myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
+  setIsFlipped(!isFlipped);
+};
 
 return (
   <SocketContext.Provider value={{
