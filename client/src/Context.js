@@ -40,54 +40,7 @@ const stopRecording = () => {
     setRecording(false);
   }
 };
-const pauseRecording = () => {
-  if (mediaRecorderRef.current && mediaRecorderRef.current.state === "recording") {
-    mediaRecorderRef.current.pause();
-    setRecording(false);
-  }
-};
-const resumeRecording = () => {
-  if (mediaRecorderRef.current && mediaRecorderRef.current.state === "paused") {
-    mediaRecorderRef.current.resume();
-    setRecording(true);
-  }
-};
-const [recordingQuality, setRecordingQuality] = useState("high");
 
-const handleQualityChange = (quality) => {
-  setRecordingQuality(quality);
-  // Additional logic to handle stream quality adjustment
-};
-const [recordingTime, setRecordingTime] = useState(0);
-
-useEffect(() => {
-  let interval;
-  if (recording) {
-    interval = setInterval(() => {
-      setRecordingTime((prev) => prev + 1);
-    }, 1000);
-  }
-  return () => clearInterval(interval);
-}, [recording]);
-const [isMuted, setIsMuted] = useState(false);
-
-const toggleMute = () => {
-  stream.getAudioTracks()[0].enabled = !isMuted;
-  setIsMuted(!isMuted);
-};
-const [filter, setFilter] = useState("none");
-
-const applyFilter = () => {
-  myVideo.current.style.filter = filter;
-};
-const saveRecordingToServer = (blob) => {
-  const formData = new FormData();
-  formData.append('video', blob, 'recording.webm');
-  fetch('/upload', {
-    method: 'POST',
-    body: formData,
-  });
-};
 
 const [countdown, setCountdown] = useState(3);
 
