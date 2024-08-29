@@ -88,19 +88,7 @@ const saveRecordingToServer = (blob) => {
     body: formData,
   });
 };
-const captureScreenshot = () => {
-  const videoElement = myVideo.current;
-  const canvas = document.createElement('canvas');
-  canvas.width = videoElement.videoWidth;
-  canvas.height = videoElement.videoHeight;
-  const ctx = canvas.getContext('2d');
-  ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-  const dataUrl = canvas.toDataURL('image/png');
-  const a = document.createElement('a');
-  a.href = dataUrl;
-  a.download = 'screenshot.png';
-  a.click();
-};
+
 const [countdown, setCountdown] = useState(3);
 
 const startCountdown = () => {
