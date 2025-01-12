@@ -51,19 +51,8 @@ const VideoPlayer = () => {
     }
   };
 
-  const handleVolumeChange = (newValue) => {
-    setVolume(newValue);
-    if (videoRef.current) {
-      videoRef.current.volume = newValue / 100;
-    }
-  };
+  
 
-  const handleMuteToggle = () => {
-    setIsMuted(!isMuted);
-    if (videoRef.current) {
-      videoRef.current.muted = !isMuted;
-    }
-  };
 
   const handleSpeedChange = (newSpeed) => {
     setSpeed(newSpeed);
