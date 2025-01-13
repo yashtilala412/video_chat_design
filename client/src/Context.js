@@ -93,6 +93,10 @@ useEffect(() => {
 const [isFlipped, setIsFlipped] = useState(false);
 
 const toggleVideoFlip = () => {
+  if (!myVideo.current) {
+    console.error("Video element is not available.");
+    return;
+  }
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
 };
