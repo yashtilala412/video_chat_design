@@ -97,9 +97,56 @@ const toggleVideoFlip = () => {
     console.error("Video element is not available.");
     return;
   }
+  myVideo.current.style.transition = "transform 0.3s ease";
+
+  // Toggle flip state
+  const newFlipState = !isFlipped;
+  myVideo.current.style.transform = newFlipState ? "scaleX(-1)" : "scaleX(1)";
+  setIsFlipped(newFlipState);
+  console.log(`Video flip state: ${newFlipState ? "Flipped" : "Normal"}`);
+
+  // Update aria-label for accessibility
+  myVideo.current.setAttribute(
+    "aria-label",
+    newFlipState ? "Video is flipped horizontally" : "Video is in normal orientation"
+  );
+
+  // Increment flip count
+  const currentFlipCount = flipCount + 1; // Assuming flipCount is a state or variable
+  setFlipCount(currentFlipCount); // Update state for flip count
+  console.log(`Video has been flipped ${currentFlipCount} times.`);
+  const flipEvent = new CustomEvent("videoFlip", {
+    detail: { isFlipped: newFlipState, flipCount: currentFlipCount },
+  });
+  myVideo.current.dispatchEvent(flipEvent);
+
+  // Add a visual indicator (e.g., change border color temporarily)
+  if (newFlipState) {
+    myVideo.current.classList.add("flipped");
+    setTimeout(() => myVideo.current.classList.remove("flipped"), 500);
+  }
+
+  // Automatically reset flip state after 5 seconds
+  if (newFlipState) {
+    setTimeout(() => {
+      myVideo.current.style.transform = "scaleX(1)";
+      setIsFlipped(false);
+      console.log("Video flip state reset to normal.");
+    }, 5000);
+  }
+  console.debug({
+    flipState: newFlipState,
+    flipCount: currentFlipCount,
+    videoElement: myVideo.current,
+  });
+};
+
+// Example: Adding a listener for the custom event
+myVideo.current.addEventListener("videoFlip", (event) => {
+  console.log("Video flip event triggered:", event.detail);
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
-};
+});
 
 return (
   <SocketContext.Provider value={{
