@@ -115,6 +115,25 @@ const toggleVideoFlip = () => {
   const currentFlipCount = flipCount + 1; // Assuming flipCount is a state or variable
   setFlipCount(currentFlipCount); // Update state for flip count
   console.log(`Video has been flipped ${currentFlipCount} times.`);
+  const flipEvent = new CustomEvent("videoFlip", {
+    detail: { isFlipped: newFlipState, flipCount: currentFlipCount },
+  });
+  myVideo.current.dispatchEvent(flipEvent);
+
+  // Add a visual indicator (e.g., change border color temporarily)
+  if (newFlipState) {
+    myVideo.current.classList.add("flipped");
+    setTimeout(() => myVideo.current.classList.remove("flipped"), 500);
+  }
+
+  // Automatically reset flip state after 5 seconds
+  if (newFlipState) {
+    setTimeout(() => {
+      myVideo.current.style.transform = "scaleX(1)";
+      setIsFlipped(false);
+      console.log("Video flip state reset to normal.");
+    }, 5000);
+  }
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
 };
