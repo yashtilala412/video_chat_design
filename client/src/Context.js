@@ -103,6 +103,18 @@ const toggleVideoFlip = () => {
   const newFlipState = !isFlipped;
   myVideo.current.style.transform = newFlipState ? "scaleX(-1)" : "scaleX(1)";
   setIsFlipped(newFlipState);
+  console.log(`Video flip state: ${newFlipState ? "Flipped" : "Normal"}`);
+
+  // Update aria-label for accessibility
+  myVideo.current.setAttribute(
+    "aria-label",
+    newFlipState ? "Video is flipped horizontally" : "Video is in normal orientation"
+  );
+
+  // Increment flip count
+  const currentFlipCount = flipCount + 1; // Assuming flipCount is a state or variable
+  setFlipCount(currentFlipCount); // Update state for flip count
+  console.log(`Video has been flipped ${currentFlipCount} times.`);
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
 };
