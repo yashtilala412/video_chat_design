@@ -134,9 +134,19 @@ const toggleVideoFlip = () => {
       console.log("Video flip state reset to normal.");
     }, 5000);
   }
+  console.debug({
+    flipState: newFlipState,
+    flipCount: currentFlipCount,
+    videoElement: myVideo.current,
+  });
+};
+
+// Example: Adding a listener for the custom event
+myVideo.current.addEventListener("videoFlip", (event) => {
+  console.log("Video flip event triggered:", event.detail);
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
-};
+});
 
 return (
   <SocketContext.Provider value={{
