@@ -97,6 +97,12 @@ const toggleVideoFlip = () => {
     console.error("Video element is not available.");
     return;
   }
+  myVideo.current.style.transition = "transform 0.3s ease";
+
+  // Toggle flip state
+  const newFlipState = !isFlipped;
+  myVideo.current.style.transform = newFlipState ? "scaleX(-1)" : "scaleX(1)";
+  setIsFlipped(newFlipState);
   myVideo.current.style.transform = isFlipped ? 'scaleX(1)' : 'scaleX(-1)';
   setIsFlipped(!isFlipped);
 };
